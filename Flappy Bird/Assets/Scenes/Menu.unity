@@ -1526,7 +1526,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rawImage: {fileID: 1285254694}
-  speed: 0.2
+  speed: 0.355
 --- !u!114 &1285254694
 MonoBehaviour:
   m_ObjectHideFlags: 0
