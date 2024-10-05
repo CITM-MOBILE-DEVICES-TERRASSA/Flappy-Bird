@@ -4,13 +4,22 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private Transform tapInfo;
-    [SerializeField] private Transform gameOverInfo;
+    [Header("UI")]
+    [SerializeField] private GameObject tapInfo;
+    [SerializeField] private GameObject gameOverInfo;
+    [Header("Background")]
+    [SerializeField] private GameObject[] background;
+    [Header("Birds")]
+    [SerializeField] private GameObject[] birds;
+    [SerializeField] private Vector3 birdPosition = new Vector3(-1, 1, 0);
+    [SerializeField] private bool instantiateBird = true;
 
     private PipesManager pipesManager;
 
     private bool isGameStarted = false;
     private bool isGameActive = true;
+    private static int backgroundIndex = 0; // 0: day, 1: night
+    private static int birdIndex = 0; // 0: yellow, 1: blue, 2: red
 
     public bool IsGameStarted() => isGameStarted;
     public bool IsGameActive() => isGameActive;
@@ -18,6 +27,29 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         pipesManager = FindObjectOfType<PipesManager>();
+
+        background[backgroundIndex].SetActive(true);
+
+        if (instantiateBird)
+            Instantiate(birds[birdIndex], birdPosition, Quaternion.identity);
+        if (pipesManager != null)
+            pipesManager.SetPipeIndex(backgroundIndex);
+    }
+
+    public void ChangeBackground(int index)
+    {
+        background[backgroundIndex].SetActive(false);
+        backgroundIndex = index;
+        background[backgroundIndex].SetActive(true);
+        if (pipesManager != null)
+            pipesManager.SetPipeIndex(backgroundIndex);
+    }
+
+    public void ChangeBird(int index)
+    {
+        birds[birdIndex].SetActive(false);
+        birdIndex = index;
+        birds[birdIndex].SetActive(true);
     }
 
     public void ChangeScene(string sceneName)
@@ -28,7 +60,7 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         isGameStarted = true;
-        tapInfo.gameObject.SetActive(false);
+        tapInfo.SetActive(false);
         StartCoroutine(pipesManager.SpawnPipes());
     }
 
@@ -36,7 +68,7 @@ public class GameManager : MonoBehaviour
     {
         isGameActive = false;
         pipesManager.StopAllCoroutines();
-        gameOverInfo.gameObject.SetActive(true);
+        gameOverInfo.SetActive(true);
     }
 
     public void PauseGame()

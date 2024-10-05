@@ -6,6 +6,7 @@ TagManager:
   tags:
   - IgnoreUI
   - Score
+  - Bird
   layers:
   - Default
   - TransparentFX
