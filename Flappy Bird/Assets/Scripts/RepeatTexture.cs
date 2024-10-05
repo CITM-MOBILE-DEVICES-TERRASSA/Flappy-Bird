@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class RepeatTexture : MonoBehaviour
 {
-    public RawImage rawImage;
-    public float speed = 0.5f;
+    [SerializeField] private RawImage rawImage;
+    [SerializeField] private float speed = 0.5f;
 
     void Update()
     {
