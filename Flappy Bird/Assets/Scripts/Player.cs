@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
@@ -14,10 +15,13 @@ public class Player : MonoBehaviour
     private AudioSource audioSource;
     private PlayerInput playerInput;
     private ScoreManager scoreManager;
+    private GameManager gameManager;
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();      
+        rb.gravityScale = 0;
+
         audioSource = GetComponent<AudioSource>();
 
         playerInput = new PlayerInput();
@@ -27,6 +31,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        gameManager = FindObjectOfType<GameManager>();
         scoreManager = FindObjectOfType<ScoreManager>();
     }
 
@@ -36,7 +41,13 @@ public class Player : MonoBehaviour
     }
 
     private void Jump()
-    {
+    {   
+        if (!gameManager.IsGameStarted())
+        {
+            rb.gravityScale = 1;
+            gameManager.StartGame();
+        }
+
         if (Time.timeScale == 0 || IsPointerOverUIObject())
             return;
 
@@ -70,7 +81,7 @@ public class Player : MonoBehaviour
     private bool IsPointerOverUIObject()
     {
         PointerEventData eventData = new PointerEventData(EventSystem.current);
-        eventData.position = Input.mousePosition;
+        eventData.position = Mouse.current.position.ReadValue();
         List<RaycastResult> results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(eventData, results);
 

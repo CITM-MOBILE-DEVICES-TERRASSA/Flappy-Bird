@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PipeManager : MonoBehaviour
+public class PipesManager : MonoBehaviour
 {
     [SerializeField] private GameObject topPipePrefab;
     [SerializeField] private GameObject bottomPipePrefab;
@@ -12,12 +12,7 @@ public class PipeManager : MonoBehaviour
     [SerializeField] private float maxHeight = 1f;   
     [SerializeField] private float pipesDistance = 7f;
 
-    private void Start()
-    {
-        StartCoroutine(SpawnPipes());
-    }
-
-    private IEnumerator SpawnPipes()
+    public IEnumerator SpawnPipes()
     {
         while (true)
         {
