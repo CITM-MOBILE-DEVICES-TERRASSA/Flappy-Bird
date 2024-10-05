@@ -8,30 +8,21 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private Sprite[] numberSprites;
     [SerializeField] private GameObject digitPrefab;
     [SerializeField] private Transform panel;
-    private float timeElapsed = 0f;
+
+    private AudioSource audioSource;
 
     private int score = 0;
 
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         UpdateScoreUI();
-    }
-
-    private void Update()
-    {
-         timeElapsed += Time.deltaTime;
-
-        if (timeElapsed >= .01f)
-        {
-            AddScore(1);
-            timeElapsed = 0f;
-        }
-        
     }
 
     public void AddScore(int amount)
     {
         score += amount;
+        audioSource.Play();
         UpdateScoreUI();
     }
 

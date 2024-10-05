@@ -13,8 +13,9 @@ public class Player : MonoBehaviour
     private Rigidbody2D rb;
     private AudioSource audioSource;
     private PlayerInput playerInput;
+    private ScoreManager scoreManager;
 
-    void Awake()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         audioSource = GetComponent<AudioSource>();
@@ -22,6 +23,11 @@ public class Player : MonoBehaviour
         playerInput = new PlayerInput();
         playerInput.Player.Enable();
         playerInput.Player.Tap.performed += ctx => Jump();
+    }
+
+    private void Start()
+    {
+        scoreManager = FindObjectOfType<ScoreManager>();
     }
 
     private void OnDisable()
@@ -39,7 +45,7 @@ public class Player : MonoBehaviour
         audioSource.Play();
     }
 
-    void Update()
+    private void Update()
     {
         if (rb.velocity.y < 0)
             RotatePlayer(downRotation);
@@ -50,6 +56,15 @@ public class Player : MonoBehaviour
         float currentRotation = transform.eulerAngles.z;
         float newRotation = Mathf.LerpAngle(currentRotation, targetRotation, rotationSpeed * Time.deltaTime);
         transform.eulerAngles = new Vector3(0, 0, newRotation);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) 
+    {
+        if (other.gameObject.tag == "Score")
+        {
+            scoreManager.AddScore(1);
+            other.gameObject.SetActive(false);
+        }
     }
 
     private bool IsPointerOverUIObject()
