@@ -167,6 +167,7 @@ MonoBehaviour:
   rotationSpeed: 10
   upRotation: 30
   downRotation: -90
+  hitClip: {fileID: 8300000, guid: 405fa9b6b3f611b43b027ab3b469f6bb, type: 3}
 --- !u!95 &4163282550180049277
 Animator:
   serializedVersion: 5

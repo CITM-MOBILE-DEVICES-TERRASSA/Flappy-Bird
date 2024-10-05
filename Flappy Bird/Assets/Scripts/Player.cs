@@ -6,10 +6,13 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
+    [Header("Player Settings")]
     [SerializeField] private float jumpForce = 5f;
     [SerializeField] private float rotationSpeed = 5f;
     [SerializeField] private float upRotation = 30f;
     [SerializeField] private float downRotation = -90f;
+    [Header("Audio")]
+    [SerializeField] private AudioClip hitClip;
 
     private Rigidbody2D rb;
     private AudioSource audioSource;
@@ -17,6 +20,8 @@ public class Player : MonoBehaviour
     private PlayerInput playerInput;
     private ScoreManager scoreManager;
     private GameManager gameManager;
+
+    private bool isDead = false;
 
     private void Awake()
     {
@@ -82,6 +87,11 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other) 
     {
+        if (isDead)
+            return;
+        
+        isDead = true;
+        audioSource.PlayOneShot(hitClip);
         animator.SetTrigger("Die");
         gameManager.FinishGame();
     }
