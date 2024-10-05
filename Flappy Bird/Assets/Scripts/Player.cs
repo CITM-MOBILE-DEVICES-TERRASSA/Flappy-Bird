@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Player : MonoBehaviour
 {
@@ -30,6 +31,9 @@ public class Player : MonoBehaviour
 
     private void Jump()
     {
+        if (Time.timeScale == 0 || IsPointerOverUIObject())
+            return;
+
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         transform.eulerAngles = new Vector3(0, 0, upRotation);
         audioSource.Play();
@@ -46,5 +50,23 @@ public class Player : MonoBehaviour
         float currentRotation = transform.eulerAngles.z;
         float newRotation = Mathf.LerpAngle(currentRotation, targetRotation, rotationSpeed * Time.deltaTime);
         transform.eulerAngles = new Vector3(0, 0, newRotation);
+    }
+
+    private bool IsPointerOverUIObject()
+    {
+        PointerEventData eventData = new PointerEventData(EventSystem.current);
+        eventData.position = Input.mousePosition;
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventData, results);
+
+        foreach (RaycastResult result in results)
+        {
+            if (result.gameObject.tag == "IgnoreUI")
+                continue;
+
+            return true;
+        }
+
+        return false;
     }
 }
