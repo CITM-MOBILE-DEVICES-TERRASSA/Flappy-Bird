@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     [Header("UI")]
     [SerializeField] private GameObject tapInfo;
     [SerializeField] private GameObject gameOverInfo;
+    [SerializeField] private GameObject pause;
     [Header("Background")]
     [SerializeField] private GameObject[] background;
     [Header("Birds")]
@@ -14,6 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Vector3 birdPosition = new Vector3(-1, 1, 0);
     [SerializeField] private bool instantiateBird = true;
 
+    private AudioSource audioSource;
     private PipesManager pipesManager;
 
     private bool isGameStarted = false;
@@ -23,6 +25,11 @@ public class GameManager : MonoBehaviour
 
     public bool IsGameStarted() => isGameStarted;
     public bool IsGameActive() => isGameActive;
+
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     private void Start()
     {
@@ -67,8 +74,10 @@ public class GameManager : MonoBehaviour
     public void FinishGame()
     {
         isGameActive = false;
+        pause.gameObject.SetActive(false);
         pipesManager.StopAllCoroutines();
         gameOverInfo.SetActive(true);
+        audioSource.Play();
     }
 
     public void PauseGame()
