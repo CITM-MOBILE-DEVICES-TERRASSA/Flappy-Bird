@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
 
     private Rigidbody2D rb;
     private AudioSource audioSource;
+    private Animator animator;
     private PlayerInput playerInput;
     private ScoreManager scoreManager;
     private GameManager gameManager;
@@ -23,6 +24,7 @@ public class Player : MonoBehaviour
         rb.gravityScale = 0;
 
         audioSource = GetComponent<AudioSource>();
+        animator = GetComponent<Animator>();
 
         playerInput = new PlayerInput();
         playerInput.Player.Enable();
@@ -48,7 +50,7 @@ public class Player : MonoBehaviour
             gameManager.StartGame();
         }
 
-        if (Time.timeScale == 0 || IsPointerOverUIObject())
+        if (Time.timeScale == 0 || !gameManager.IsGameActive() || IsPointerOverUIObject())
             return;
 
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
@@ -76,6 +78,12 @@ public class Player : MonoBehaviour
             scoreManager.AddScore(1);
             other.gameObject.SetActive(false);
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D other) 
+    {
+        animator.SetTrigger("Die");
+        gameManager.FinishGame();
     }
 
     private bool IsPointerOverUIObject()

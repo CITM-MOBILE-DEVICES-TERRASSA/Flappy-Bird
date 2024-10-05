@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private Transform tapInfo;
+    [SerializeField] private Transform gameOverInfo;
 
     private PipesManager pipesManager;
 
@@ -12,6 +13,7 @@ public class GameManager : MonoBehaviour
     private bool isGameActive = true;
 
     public bool IsGameStarted() => isGameStarted;
+    public bool IsGameActive() => isGameActive;
 
     private void Start()
     {
@@ -28,6 +30,13 @@ public class GameManager : MonoBehaviour
         isGameStarted = true;
         tapInfo.gameObject.SetActive(false);
         StartCoroutine(pipesManager.SpawnPipes());
+    }
+
+    public void FinishGame()
+    {
+        isGameActive = false;
+        pipesManager.StopAllCoroutines();
+        gameOverInfo.gameObject.SetActive(true);
     }
 
     public void PauseGame()
