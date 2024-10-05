@@ -6,6 +6,11 @@ public class GameManager : MonoBehaviour
 {
     private bool isGameActive = true;
 
+    public void ChangeScene(string sceneName)
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
+    }
+
     public void PauseGame()
     {
         if (isGameActive)
