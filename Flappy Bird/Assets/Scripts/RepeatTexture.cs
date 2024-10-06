@@ -6,10 +6,13 @@ using UnityEngine.UI;
 public class RepeatTexture : MonoBehaviour
 {
     [SerializeField] private RawImage rawImage;
-    [SerializeField] private float speed = 0.5f;
+    [SerializeField] private float baseSpeed = 0.5f;
 
     void Update()
     {
+        float aspectRatio = (float)Screen.height / Screen.width;
+        float targetAspectRatio = 16 / 9f;
+        float speed = baseSpeed * (aspectRatio / targetAspectRatio);
         Rect uvRect = rawImage.uvRect;
         uvRect.x += speed * Time.deltaTime;
         uvRect.x = Mathf.Repeat(uvRect.x, 1f);
