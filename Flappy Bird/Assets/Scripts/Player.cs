@@ -67,6 +67,9 @@ public class Player : MonoBehaviour
     {
         if (rb.velocity.y < 0)
             RotatePlayer(downRotation);
+
+        if (transform.position.y > Camera.main.orthographicSize)
+            Die();
     }
 
     private void RotatePlayer(float targetRotation)
@@ -86,6 +89,11 @@ public class Player : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D other) 
+    {
+        Die();
+    }
+
+    private void Die()
     {
         if (isDead)
             return;

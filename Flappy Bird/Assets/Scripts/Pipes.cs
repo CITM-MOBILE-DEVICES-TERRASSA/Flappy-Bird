@@ -23,5 +23,9 @@ public class Pipes : MonoBehaviour
             if (transform.position.x < destroyPosition)
                 Destroy(gameObject);
         }
+        else
+        {
+            GetComponent<BoxCollider2D>().enabled = false;
+        }
     }
 }
