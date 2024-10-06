@@ -7,6 +7,7 @@ public class ScoreManager : MonoBehaviour
 {
     [SerializeField] private Sprite[] numberSprites;
     [SerializeField] private GameObject digitPrefab;
+    [SerializeField] private GameObject newScore;
     [SerializeField] private Transform panel;
     [Header("Game Over Score")]
     [SerializeField] private GameObject[] medals;
@@ -84,9 +85,11 @@ public class ScoreManager : MonoBehaviour
             medals[medalsIndex].SetActive(true);
 
         UpdateScoreUI(score, smallDigitPrefab, scorePanel);
+
         if (score > PlayerPrefs.GetInt("BestScore", 0))
         {
             PlayerPrefs.SetInt("BestScore", score);
+            newScore.SetActive(true);
         }
         UpdateScoreUI(PlayerPrefs.GetInt("BestScore", 0), smallDigitPrefab, bestScorePanel);
 

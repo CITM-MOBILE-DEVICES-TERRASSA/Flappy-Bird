@@ -10,7 +10,6 @@ public class PipesManager : MonoBehaviour
     [Header("Pipes Settings")]
     [SerializeField] private float spawnInterval = 2f;
     [SerializeField] private float spawnPositionX = 5f;
-    [SerializeField] private float minHeight = -1f; 
     [SerializeField] private float maxHeight = 1f;   
     [SerializeField] private float pipesDistance = 7f;
 

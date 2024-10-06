@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
 
     private AudioSource audioSource;
     private PipesManager pipesManager;
+    private Coroutine spawnPipesCoroutine;
 
     private bool isGameStarted = false;
     private bool isGameActive = true;
@@ -37,7 +38,8 @@ public class GameManager : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         
-        pause.gameObject.SetActive(false);
+        if (pause != null)
+            pause.gameObject.SetActive(false);
     }
 
     private void Start()
@@ -99,14 +101,14 @@ public class GameManager : MonoBehaviour
         isGameStarted = true;
         tapInfo.SetActive(false);
         pause.gameObject.SetActive(true);
-        StartCoroutine(pipesManager.SpawnPipes());
+        spawnPipesCoroutine = StartCoroutine(pipesManager.SpawnPipes());
     }
 
     public void FinishGame()
     {
         isGameActive = false;
         pause.gameObject.SetActive(false);
-        pipesManager.StopAllCoroutines();
+        StopCoroutine(spawnPipesCoroutine);
         gameOverInfo.SetActive(true);
         audioSource.Play();
     }
