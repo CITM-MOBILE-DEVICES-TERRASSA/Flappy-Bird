@@ -65,7 +65,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if (rb.velocity.y < 0)
+        if (rb.velocity.y < -2)
             RotatePlayer(downRotation);
 
         if (transform.position.y > Camera.main.orthographicSize)
