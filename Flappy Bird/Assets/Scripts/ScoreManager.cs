@@ -48,6 +48,7 @@ public class ScoreManager : MonoBehaviour
     public void AddScore(int amount)
     {
         score += amount;
+        Debug.Log("Score: " + score);
         audioSource.Play();
         UpdateScoreUI(score, digitPrefab, panel);
     }

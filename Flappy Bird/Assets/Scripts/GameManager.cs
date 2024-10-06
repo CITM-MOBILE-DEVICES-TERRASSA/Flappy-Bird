@@ -36,6 +36,8 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
+        
+        pause.gameObject.SetActive(false);
     }
 
     private void Start()
@@ -96,6 +98,7 @@ public class GameManager : MonoBehaviour
     {
         isGameStarted = true;
         tapInfo.SetActive(false);
+        pause.gameObject.SetActive(true);
         StartCoroutine(pipesManager.SpawnPipes());
     }
 
