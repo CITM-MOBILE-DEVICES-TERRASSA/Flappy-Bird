@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -41,12 +42,17 @@ public class GameManager : MonoBehaviour
     {
         pipesManager = FindObjectOfType<PipesManager>();
 
-        background[backgroundIndex].SetActive(true);
+        if (PlayerPrefs.HasKey("BackgroundIndex"))
+            backgroundIndex = PlayerPrefs.GetInt("BackgroundIndex");
+        if (PlayerPrefs.HasKey("BirdIndex"))
+            birdIndex = PlayerPrefs.GetInt("BirdIndex");
 
         if (instantiateBird)
             Instantiate(birds[birdIndex], birdPosition, Quaternion.identity);
-        else 
+        else
             birds[birdIndex].SetActive(true);
+            
+        background[backgroundIndex].SetActive(true);
 
         if (pipesManager != null)
             pipesManager.SetPipeIndex(backgroundIndex);
@@ -67,6 +73,7 @@ public class GameManager : MonoBehaviour
     {
         background[backgroundIndex].SetActive(false);
         backgroundIndex = index;
+        PlayerPrefs.SetInt("BackgroundIndex", backgroundIndex);
         background[backgroundIndex].SetActive(true);
         if (pipesManager != null)
             pipesManager.SetPipeIndex(backgroundIndex);
@@ -76,6 +83,7 @@ public class GameManager : MonoBehaviour
     {
         birds[birdIndex].SetActive(false);
         birdIndex = index;
+        PlayerPrefs.SetInt("BirdIndex", birdIndex);
         birds[birdIndex].SetActive(true);
     }
 

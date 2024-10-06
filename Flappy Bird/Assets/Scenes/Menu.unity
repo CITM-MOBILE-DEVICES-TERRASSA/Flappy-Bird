@@ -270,6 +270,7 @@ GameObject:
   - component: {fileID: 35842500}
   - component: {fileID: 35842502}
   - component: {fileID: 35842501}
+  - component: {fileID: 35842503}
   m_Layer: 5
   m_Name: Settings Panel
   m_TagString: Untagged
@@ -336,6 +337,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 35842499}
   m_CullTransparentMesh: 1
+--- !u!114 &35842503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 35842499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2af8c08378f8b04c9cf7ef6e3ec0cd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backgroundToggle:
+  - {fileID: 28281069}
+  - {fileID: 1665418291}
+  birdToggle:
+  - {fileID: 1885246355}
+  - {fileID: 851693508}
+  - {fileID: 1035022904}
 --- !u!1 &63369614
 GameObject:
   m_ObjectHideFlags: 0
@@ -3607,6 +3627,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 35842503}
+        m_TargetAssemblyTypeName: Toggles, Assembly-CSharp
+        m_MethodName: UpdateToggles
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
