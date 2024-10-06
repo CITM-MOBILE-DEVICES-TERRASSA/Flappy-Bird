@@ -51,7 +51,7 @@ public class Player : MonoBehaviour
     {   
         if (!gameManager.IsGameStarted())
         {
-            rb.gravityScale = 1;
+            rb.gravityScale = 2;
             gameManager.StartGame();
         }
 
@@ -94,6 +94,7 @@ public class Player : MonoBehaviour
         audioSource.PlayOneShot(hitClip);
         animator.SetTrigger("Die");
         gameManager.FinishGame();
+        scoreManager.GameOverScore();
     }
 
     private bool IsPointerOverUIObject()

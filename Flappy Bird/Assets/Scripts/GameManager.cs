@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,6 +15,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject[] birds;
     [SerializeField] private Vector3 birdPosition = new Vector3(-1, 1, 0);
     [SerializeField] private bool instantiateBird = true;
+    [Header("Medals")]
+    [SerializeField] private TextMeshProUGUI bronzeMedalText;
+    [SerializeField] private TextMeshProUGUI silverMedalText;
+    [SerializeField] private TextMeshProUGUI goldMedalText;
+    [SerializeField] private TextMeshProUGUI platinumMedalText;
 
     private AudioSource audioSource;
     private PipesManager pipesManager;
@@ -39,8 +45,22 @@ public class GameManager : MonoBehaviour
 
         if (instantiateBird)
             Instantiate(birds[birdIndex], birdPosition, Quaternion.identity);
+        else 
+            birds[birdIndex].SetActive(true);
+
         if (pipesManager != null)
             pipesManager.SetPipeIndex(backgroundIndex);
+
+        if (bronzeMedalText != null && silverMedalText != null && goldMedalText != null && platinumMedalText != null)
+            UpdateMedalText();
+    }
+
+    private void UpdateMedalText()
+    {
+        bronzeMedalText.text = PlayerPrefs.GetInt("BronzeMedal", 0).ToString();
+        silverMedalText.text = PlayerPrefs.GetInt("SilverMedal", 0).ToString();
+        goldMedalText.text = PlayerPrefs.GetInt("GoldMedal", 0).ToString();
+        platinumMedalText.text = PlayerPrefs.GetInt("PlatinumMedal", 0).ToString();
     }
 
     public void ChangeBackground(int index)

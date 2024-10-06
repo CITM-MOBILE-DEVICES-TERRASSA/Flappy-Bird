@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RedBird
       objectReference: {fileID: 0}
+    - target: {fileID: 1532885123796331931, guid: fbf5eefbd5aafd64298d04642984c4b4, type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4163282550180049277, guid: fbf5eefbd5aafd64298d04642984c4b4, type: 3}
       propertyPath: m_Controller
       value: 
@@ -20,10 +24,22 @@ PrefabInstance:
       propertyPath: hitClip
       value: 
       objectReference: {fileID: 8300000, guid: 405fa9b6b3f611b43b027ab3b469f6bb, type: 3}
+    - target: {fileID: 7500483405483497258, guid: fbf5eefbd5aafd64298d04642984c4b4, type: 3}
+      propertyPath: jumpForce
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500483405483497258, guid: fbf5eefbd5aafd64298d04642984c4b4, type: 3}
+      propertyPath: rotationSpeed
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7897935342308370517, guid: fbf5eefbd5aafd64298d04642984c4b4, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 841165210, guid: 50af343c0d4e33b4a9822db17d9ee01e, type: 3}
+    - target: {fileID: 9201507705372109178, guid: fbf5eefbd5aafd64298d04642984c4b4, type: 3}
+      propertyPath: m_Radius
+      value: 0.07
+      objectReference: {fileID: 0}
     - target: {fileID: 9216956119742126205, guid: fbf5eefbd5aafd64298d04642984c4b4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
