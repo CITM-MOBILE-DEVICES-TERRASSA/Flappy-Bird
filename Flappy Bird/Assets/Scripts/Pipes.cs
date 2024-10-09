@@ -16,8 +16,13 @@ public class Pipes : MonoBehaviour
 
     private void Update()
     {
+        var collider = GetComponent<BoxCollider2D>();
+
         if (gameManager.IsGameActive())
         {
+            if (!collider.enabled)
+                collider.enabled = true;
+
             transform.position -= new Vector3(velocity, 0, 0) * Time.deltaTime;
 
             if (transform.position.x < destroyPosition)
@@ -25,7 +30,8 @@ public class Pipes : MonoBehaviour
         }
         else
         {
-            GetComponent<BoxCollider2D>().enabled = false;
+            if (collider.enabled)
+                collider.enabled = false;
         }
     }
 }
