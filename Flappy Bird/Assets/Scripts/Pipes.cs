@@ -8,10 +8,12 @@ public class Pipes : MonoBehaviour
     [SerializeField] private float destroyPosition = -5f;
 
     private GameManager gameManager;
+    private PipesPool pipesPool;
 
     private void Awake()
     {
         gameManager = FindObjectOfType<GameManager>();
+        pipesPool = FindObjectOfType<PipesPool>();
     }
 
     private void Update()
@@ -26,7 +28,9 @@ public class Pipes : MonoBehaviour
             transform.position -= new Vector3(velocity, 0, 0) * Time.deltaTime;
 
             if (transform.position.x < destroyPosition)
-                Destroy(gameObject);
+            {
+                pipesPool.ReturnPipe(gameObject);
+            }
         }
         else
         {

@@ -4,18 +4,25 @@ using UnityEngine;
 
 public class PipesManager : MonoBehaviour
 {
+    [Header("Pipes Pool Reference")]
+    [SerializeField] private PipesPool pipesPool;
+
     [Header("Pipes Prefabs")]
     [SerializeField] private GameObject[] topPipePrefabs;
     [SerializeField] private GameObject[] bottomPipePrefabs;
+
     [Header("Pipes Settings")]
     [SerializeField] private float spawnInterval = 2f;
     [SerializeField] private float spawnPositionX = 5f;
     [SerializeField] private float maxHeight = 1f;   
     [SerializeField] private float pipesDistance = 7f;
 
-    private int pipeIndex = 0; // 0: day, 1: night
+    public int SetPipeIndex(int index) => pipesPool.SetPipeIndex(index);
 
-    public int SetPipeIndex(int index) => pipeIndex = index;
+    private void Awake()
+    {
+        pipesPool.InitializePipes(topPipePrefabs, bottomPipePrefabs);
+    }
 
     public IEnumerator SpawnPipes()
     {
@@ -24,11 +31,19 @@ public class PipesManager : MonoBehaviour
             float randomHeight = Random.Range(maxHeight - 1f, maxHeight + 1f);
 
             Vector3 topSpawnPosition = new Vector3(spawnPositionX, randomHeight, 0);
-            Instantiate(topPipePrefabs[pipeIndex], topSpawnPosition, Quaternion.identity);
+            GameObject topPipe = pipesPool.GetTopPipe();
+            if (topPipe != null)
+            {
+                topPipe.transform.position = topSpawnPosition;
+            }
 
             float bottomPipeHeight = randomHeight - pipesDistance;
             Vector3 bottomSpawnPosition = new Vector3(spawnPositionX, bottomPipeHeight, 0);
-            Instantiate(bottomPipePrefabs[pipeIndex], bottomSpawnPosition, Quaternion.identity);
+            GameObject bottomPipe = pipesPool.GetBottomPipe();
+            if (bottomPipe != null)
+            {
+                bottomPipe.transform.position = bottomSpawnPosition;
+            }
 
             yield return new WaitForSeconds(spawnInterval);
         }

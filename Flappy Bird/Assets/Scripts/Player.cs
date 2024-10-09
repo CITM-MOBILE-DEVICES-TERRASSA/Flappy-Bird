@@ -84,7 +84,6 @@ public class Player : MonoBehaviour
         if (other.gameObject.tag == "Score")
         {
             scoreManager.AddScore(1);
-            other.gameObject.SetActive(false);
         }
     }
 
