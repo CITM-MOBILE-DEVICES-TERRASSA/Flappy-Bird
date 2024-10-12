@@ -12,10 +12,9 @@ public class PipesPool : MonoBehaviour
 
     private int pipeIndex = 0;
 
-    public int SetPipeIndex(int index) => pipeIndex;
-
     private void Awake()
     {
+        pipeIndex = PlayerPrefs.GetInt("BackgroundIndex", 0);
         topPipesPool = new List<GameObject>();
         bottomPipesPool = new List<GameObject>();
     }

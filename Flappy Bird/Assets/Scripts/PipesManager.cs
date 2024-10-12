@@ -17,11 +17,21 @@ public class PipesManager : MonoBehaviour
     [SerializeField] private float maxHeight = 1f;   
     [SerializeField] private float pipesDistance = 7f;
 
-    public int SetPipeIndex(int index) => pipesPool.SetPipeIndex(index);
+    private Coroutine spawnPipesCoroutine;
 
     private void Awake()
     {
         pipesPool.InitializePipes(topPipePrefabs, bottomPipePrefabs);
+    }
+
+    public void StartSpawningPipes()
+    {
+        spawnPipesCoroutine = StartCoroutine(SpawnPipes());
+    }
+
+    public void StopSpawningPipes()
+    {
+        StopCoroutine(spawnPipesCoroutine);
     }
 
     public IEnumerator SpawnPipes()

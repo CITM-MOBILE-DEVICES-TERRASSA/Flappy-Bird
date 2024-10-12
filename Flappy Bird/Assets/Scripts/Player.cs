@@ -19,7 +19,6 @@ public class Player : MonoBehaviour
     private Animator animator;
     private PlayerInput playerInput;
     private ScoreManager scoreManager;
-    private GameManager gameManager;
 
     private bool isDead = false;
 
@@ -34,28 +33,25 @@ public class Player : MonoBehaviour
         playerInput = new PlayerInput();
         playerInput.Player.Enable();
         playerInput.Player.Tap.performed += ctx => Jump();
-    }
-
-    private void Start()
-    {
-        gameManager = FindObjectOfType<GameManager>();
+        
         scoreManager = FindObjectOfType<ScoreManager>();
     }
 
     private void OnDisable()
     {
         playerInput.Player.Tap.performed -= ctx => Jump();
+        playerInput.Dispose();
     }
 
     private void Jump()
     {   
-        if (!gameManager.IsGameStarted())
+        if (!GameManager.Instance.IsGameStarted())
         {
             rb.gravityScale = 2;
-            gameManager.StartGame();
+            GameManager.Instance.StartGame();
         }
 
-        if (Time.timeScale == 0 || !gameManager.IsGameActive() || IsPointerOverUIObject())
+        if (Time.timeScale == 0 || !GameManager.Instance.IsGameActive() || IsPointerOverUIObject())
             return;
 
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
@@ -100,7 +96,7 @@ public class Player : MonoBehaviour
         isDead = true;
         audioSource.PlayOneShot(hitClip);
         animator.SetTrigger("Die");
-        gameManager.FinishGame();
+        GameManager.Instance.FinishGame();
         scoreManager.GameOverScore();
     }
 

@@ -7,12 +7,10 @@ public class Pipes : MonoBehaviour
     [SerializeField] private float velocity = 2f;
     [SerializeField] private float destroyPosition = -5f;
 
-    private GameManager gameManager;
     private PipesPool pipesPool;
 
     private void Awake()
     {
-        gameManager = FindObjectOfType<GameManager>();
         pipesPool = FindObjectOfType<PipesPool>();
     }
 
@@ -20,7 +18,7 @@ public class Pipes : MonoBehaviour
     {
         var collider = GetComponent<BoxCollider2D>();
 
-        if (gameManager.IsGameActive())
+        if (GameManager.Instance.IsGameActive())
         {
             if (!collider.enabled)
                 collider.enabled = true;

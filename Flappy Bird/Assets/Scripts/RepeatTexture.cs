@@ -7,17 +7,10 @@ public class RepeatTexture : MonoBehaviour
 {
     [SerializeField] private RawImage rawImage;
     [SerializeField] private float baseSpeed = 0.5f;
-
-    private GameManager gameManager;
-
-    private void Start()
+    
+    private void Update()
     {
-        gameManager = FindObjectOfType<GameManager>();
-    }
-
-    void Update()
-    {
-        if (!gameManager.IsGameActive())
+        if (!GameManager.Instance.IsGameActive())
             return;
             
         float aspectRatio = (float)Screen.height / Screen.width;

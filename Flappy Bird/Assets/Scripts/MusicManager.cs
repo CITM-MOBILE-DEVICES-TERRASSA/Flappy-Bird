@@ -5,8 +5,11 @@ using UnityEngine;
 public class MusicManager : MonoBehaviour
 {
     private static MusicManager instance;
+    AudioSource audioSource;
 
-    void Awake()
+    public static MusicManager Instance => instance;
+
+    private void Awake()
     {
         if (instance == null)
         {
@@ -17,5 +20,17 @@ public class MusicManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        audioSource = GetComponent<AudioSource>();
+    }
+
+    public void PauseMusic()
+    {
+        audioSource.Pause();
+    }
+
+    public void PlayMusic()
+    {
+        audioSource.Play();
     }
 }

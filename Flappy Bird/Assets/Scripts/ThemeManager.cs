@@ -14,11 +14,13 @@ public class ThemeManager : MonoBehaviour
     private static int backgroundIndex = 0; // 0: day, 1: night
     private static int birdIndex = 0; // 0: yellow, 1: blue, 2: red
 
-    private PipesManager pipesManager;
-
-    private void Awake()
+    private void Start()
     {
-        pipesManager = FindObjectOfType<PipesManager>();
+        GetBackgroundInt();
+        GetBirdInt();
+
+        SpawnBackground();
+        SpawnBird();
     }
 
     public void SpawnBird()
@@ -44,8 +46,6 @@ public class ThemeManager : MonoBehaviour
         backgroundIndex = index;
         PlayerPrefs.SetInt("BackgroundIndex", backgroundIndex);
         background[backgroundIndex].SetActive(true);
-        if (pipesManager != null)
-            pipesManager.SetPipeIndex(backgroundIndex);
     }
 
     public void ChangeBird(int index)
@@ -67,6 +67,4 @@ public class ThemeManager : MonoBehaviour
         if (PlayerPrefs.HasKey("BackgroundIndex"))
             backgroundIndex = PlayerPrefs.GetInt("BackgroundIndex");
     }
-
-
 }

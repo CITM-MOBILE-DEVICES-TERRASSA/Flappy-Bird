@@ -1,73 +1,62 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-
     private AudioSource audioSource;
     private PipesManager pipesManager;
     private UIManager uiManager;
     private ThemeManager themeManager;
     private MedalManager medalManager;
-    private Coroutine spawnPipesCoroutine;
 
     private bool isGameStarted = false;
     private bool isGameActive = true;
     private static int backgroundIndex = 0; // 0: day, 1: night
-    private static int birdIndex = 0; // 0: yellow, 1: blue, 2: red
 
     public bool IsGameStarted() => isGameStarted;
     public bool IsGameActive() => isGameActive;
 
+    private static GameManager instance;
+    public static GameManager Instance => instance;
+
     private void Awake()
     {
-        uiManager = FindObjectOfType<UIManager>();
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+            SceneManager.sceneLoaded += OnSceneLoaded;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
         themeManager = FindObjectOfType<ThemeManager>();
-        medalManager = FindObjectOfType<MedalManager>();
 
         audioSource = GetComponent<AudioSource>();
-
-        if(uiManager != null)
-        {
-            uiManager.PauseGameObject();
-        }
-       
     }
 
     private void Start()
     {
-        pipesManager = FindObjectOfType<PipesManager>();
-
-        themeManager.SpawnBird();
         themeManager.SpawnBackground();
-
-        if (pipesManager != null)
-            pipesManager.SetPipeIndex(backgroundIndex);
-        
-        medalManager.CheckUpdate();
-    }
-    
-
-    public void ChangeScene(string sceneName)
-    {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
+        themeManager.SpawnBird();
     }
 
     public void StartGame()
     {
         isGameStarted = true;
         uiManager.Begin();
-        spawnPipesCoroutine = StartCoroutine(pipesManager.SpawnPipes());
+        pipesManager.StartSpawningPipes();
     }
 
     public void FinishGame()
     {
         isGameActive = false;
         uiManager.GameOver();
-        StopCoroutine(spawnPipesCoroutine);
+        pipesManager.StopSpawningPipes();
         audioSource.Play();
     }
 
@@ -77,11 +66,30 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale = 0;
             isGameActive = false;
+            MusicManager.Instance.PauseMusic();
         }
         else
         {
             Time.timeScale = 1;
             isGameActive = true;
+            MusicManager.Instance.PlayMusic();
+        }
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        isGameActive = true;
+        isGameStarted = false;
+        
+        if (scene.name == "Menu")
+        {
+            medalManager = FindObjectOfType<MedalManager>();
+            medalManager.CheckUpdate();
+        }
+        else if (scene.name == "Gameplay")
+        {
+            uiManager = FindObjectOfType<UIManager>();
+            pipesManager = FindObjectOfType<PipesManager>();
         }
     }
 }
