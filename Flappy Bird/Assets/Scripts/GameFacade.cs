@@ -4,19 +4,28 @@ using UnityEngine;
 
 public class GameFacade : MonoBehaviour
 {
-    private void StartMenu()
-    {   
 
+  
+
+
+    private void Awake()
+    {
+      
+    }
+        
+    private void StartMenu()
+    {
+       
     }
 
     private void StartGame()
     {
-
+        
     }
 
     private void PauseGame()
     {
-
+      
     }
 
     private void FinishGame()

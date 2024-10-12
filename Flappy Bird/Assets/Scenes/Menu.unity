@@ -246,8 +246,8 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1714408840}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 1773584283}
+        m_TargetAssemblyTypeName: ThemeManager, Assembly-CSharp
         m_MethodName: ChangeBackground
         m_Mode: 3
         m_Arguments:
@@ -1456,6 +1456,54 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &696745292
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 696745294}
+  - component: {fileID: 696745293}
+  m_Layer: 0
+  m_Name: MedalManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &696745293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 696745292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6046a8ef28994e40bdb9f94fbf534f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bronzeMedalText: {fileID: 1374029102}
+  silverMedalText: {fileID: 1189446546}
+  goldMedalText: {fileID: 1907229919}
+  platinumMedalText: {fileID: 1302322241}
+--- !u!4 &696745294
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 696745292}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.67970335, y: -2.2226698, z: 0.04326157}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &780437706
 GameObject:
   m_ObjectHideFlags: 0
@@ -1730,8 +1778,8 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1714408840}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 1773584283}
+        m_TargetAssemblyTypeName: ThemeManager, Assembly-CSharp
         m_MethodName: ChangeBird
         m_Mode: 3
         m_Arguments:
@@ -2015,8 +2063,8 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1714408840}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 1773584283}
+        m_TargetAssemblyTypeName: ThemeManager, Assembly-CSharp
         m_MethodName: ChangeBird
         m_Mode: 3
         m_Arguments:
@@ -3428,8 +3476,8 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1714408840}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 1773584283}
+        m_TargetAssemblyTypeName: ThemeManager, Assembly-CSharp
         m_MethodName: ChangeBackground
         m_Mode: 3
         m_Arguments:
@@ -3620,18 +3668,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc5ab49f76dc88948a5b1057c24e8059, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tapInfo: {fileID: 0}
-  gameOverInfo: {fileID: 0}
-  pause: {fileID: 0}
-  background:
-  - {fileID: 1178871029}
-  - {fileID: 1865230527}
-  birds:
-  - {fileID: 388665493}
-  - {fileID: 1264009516}
-  - {fileID: 1800160721}
-  birdPosition: {x: -1, y: 1, z: 0}
-  instantiateBird: 0
   bronzeMedalText: {fileID: 1374029102}
   silverMedalText: {fileID: 1189446546}
   goldMedalText: {fileID: 1907229919}
@@ -3646,6 +3682,58 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1773584282
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1773584284}
+  - component: {fileID: 1773584283}
+  m_Layer: 0
+  m_Name: ThemeManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1773584283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1773584282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9e5047de5571e940810ece2495ea41f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  background:
+  - {fileID: 1473139519}
+  birds:
+  - {fileID: 1885246351}
+  - {fileID: 851693504}
+  - {fileID: 1035022900}
+  birdPosition: {x: -1, y: 1, z: 0}
+  instantiateBird: 1
+--- !u!4 &1773584284
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1773584282}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.63212764, y: -2.2301955, z: 0.042915475}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4360,8 +4448,8 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1714408840}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 1773584283}
+        m_TargetAssemblyTypeName: ThemeManager, Assembly-CSharp
         m_MethodName: ChangeBird
         m_Mode: 3
         m_Arguments:
@@ -4842,3 +4930,5 @@ SceneRoots:
   - {fileID: 1168239826}
   - {fileID: 1714408841}
   - {fileID: 1115387599}
+  - {fileID: 1773584284}
+  - {fileID: 696745294}
